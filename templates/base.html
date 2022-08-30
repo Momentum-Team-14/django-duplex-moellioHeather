@@ -5,12 +5,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Document</title>
     
 </head>
 <body>
+<div class="header">
+    <header><a href=""></a>Code Snippets</header>
+</div>
+<div class="sidebar">
+    <div><a href="">Home</a></div>
+    <div><a href="">Snippets</a></div>
+    <div class="user">Logged in as: {{ user }}</a></div>
+    <div><a href='/accounts/logout'>Log Out</a></div>
+    <div class="add-snippet"><a href="{% url 'new_snippet' %}">Add a Snippet</a></div>
+    <div><a href="">Languages</a></div>
+    <div><a href="{% url 'admin:index' %}">Admin</a></div>
+    <div><a href="{% url 'auth_login' %}">Login</a></div>
+    <div><a href="{% url 'registration_register' %}">Create Account</a></div>
+</div>
+
+<div class="body-content">
     {% block content %}
     {% endblock %}
+</div>
 </body>
 </html>

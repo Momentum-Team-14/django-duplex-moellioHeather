@@ -1,0 +1,39 @@
+.header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    background-color: #780563;
+    color: white;
+    font-size: 5rem;
+    font-family: "monaco" ,monospace;
+    
+  }
+
+.sidebar {
+
+    height: 200px;
+    width: 150px;
+    position: static;
+    top: 120px;
+    left: 0;
+    padding-top: 40px;
+    background-color: white;
+    border: solid 2px black;
+    }
+    
+.sidebar div {
+    padding: 8px;
+    font-size: 18px;
+    display: block;
+    color: #780563;
+    font-family: "geneva";
+    }
+
+.body-content {
+    margin-left: 150px;
+    font-size: 18px;
+    }
+
+.code {
+    font-family: "monaco";
+}
