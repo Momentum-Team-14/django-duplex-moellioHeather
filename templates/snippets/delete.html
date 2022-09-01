@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Are your sure you want to delete "{{snippet}}?</p>
+<form method="POST">
+
+    <a href="{% url 'snippets_list' %}">Cancel</a>
+    
+    <input type="submit" name="Confirm">
+</form>
+{% endblock content %}

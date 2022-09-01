@@ -5,15 +5,9 @@ urlpatterns = [
     path('', views.snippets_list, name='snippets_list'),
     # path('snippet_title/<int:pk>', views.snippet_detail, name='snippet_detail'),
     path('new_snippet/', views.newSnippet, name="new_snippet"),
-    # path('edit_snippet/<int:pk>', views.editSnippet, name="edit_snippet"),
+    path('edit_snippet/<int:pk>', views.editSnippet, name="edit_snippet"),
+    path('fork_snippet/<int:pk>', views.forkSnippet, name="fork_snippet"),
+    path('delete_snippet/<int:pk>', views.deleteSnippet, name="delete_snippet")
+    # path('add_language/<int:pk>', views.addLanguage, name="add_language")
+    #     path('user_profile', views.user_profile, name='user_profile')
 ]
-
-
-# urlpatterns = [
-#     path('', views.list_albums, name='list_albums'),
-#     path('album_title/<int:pk>', views.album_detail, name='album_detail'),
-#
-#     # path('delete_item/<int:pk>/', views.deleteItem, name="delete_item"),
-#     path('create_album/', views.createAlbum, name="create_album"),
-#     path('edit_album/<int:pk>', views.editAlbum, name="edit_album"),
-#     path('delete_album/<int:pk>', views.deleteAlbum, name="delete_album"),
