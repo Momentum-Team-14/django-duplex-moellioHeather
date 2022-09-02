@@ -4,8 +4,7 @@
 <div class="new-snippet">
     <form action="" method="POST">
         {% csrf_token %}
-        {{ snippet_form.as_p }} <!-- renders forms as paragraph tags -->
-        {{ language_form }}
+        {{ form.as_p }} <!-- renders forms as paragraph tags -->
         <button type="Submit">Add</button>
     </form>
 </div>

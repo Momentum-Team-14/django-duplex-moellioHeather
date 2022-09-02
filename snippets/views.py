@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Snippet
-from .forms import SnippetForm, LanguageForm
+from .forms import SnippetForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -14,31 +14,30 @@ def snippet_detail(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
 
+    return redirect('snippets_list')
+
 
 @login_required
 def newSnippet(request):
     if request.method == "POST":
-        snippet_form = SnippetForm(request.POST)
-        language_form = LanguageForm(request.POST)
-        # form = LanguageForm()
-        # # print(request.POST)
-        # form = SnippetForm(request.POST)
-        if snippet_form.is_valid and language_form.is_valid:
+        form = SnippetForm(request.POST)
+        if form.is_valid():
             # so form is not yet saved to the database without the required author
-            snippet = snippet_form.save(commit=False)
+            snippet = form.save(commit=False)
             # author of new snippet is the user that made the request
             snippet.author = request.user
             snippet.save()
-
-            language = language_form.save(commit=False)
-            language.snippet = snippet
-            language.save()
+            # @property
+            # def get_language(self):
+            #     if self.language == "add language":
+            #         return language_form
+            #     else:
+            #         return self.language
 
             return redirect('snippets_list')
 
-    snippet_form = SnippetForm()
-    language_form = LanguageForm()
-    context = {'snippet_form': snippet_form, 'language_form': language_form}
+    form = SnippetForm()
+    context = {'form': form}
     return render(request, 'snippets/new_snippet.html', context)
 
 
@@ -84,8 +83,8 @@ def deleteSnippet(request, pk):
 @login_required
 def user_profile(request):
     snippets = Snippet.objects.filter(
-        user=request.user) | Snippet.objects.filter(author=request.user)
-    return render(request, 'snippets/profile.html'), {"snippets": snippets}
+        users=request.user) | Snippet.objects.filter(author=request.user)
+    return render(request, 'snippets/profile.html', {"snippets": snippets})
 
 
 def snippet_copy(request, pk):  # or snippets_favorite
