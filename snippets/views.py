@@ -5,6 +5,24 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+def search_snippets(request):
+    query = request.GET.get('query')
+    qs = Snippet.objects.all()
+    if query is not None:
+        qs = Snippet.object.search(query)
+    context = {
+        'snippets_list': qs
+    }
+    return render(request, 'snippets/search_snippets.html', context)
+
+
+# @login_required
+# def user_profile(request):
+#     snippets = Snippet.objects.filter(
+#         users=request.user) | Snippet.objects.filter(author=request.user)
+#     return render(request, 'snippets/profile.html', {"snippets": snippets})
+
+
 def snippets_list(request):
     snippets = Snippet.objects.all()
     return render(request, 'snippets/snippets_list.html', {'snippets': snippets})
@@ -19,24 +37,17 @@ def snippet_detail(request, pk):
 
 @login_required
 def newSnippet(request):
-    if request.method == "POST":
-        form = SnippetForm(request.POST)
-        if form.is_valid():
-            # so form is not yet saved to the database without the required author
+    if request.method == "POST":  # form submitted
+        form = SnippetForm(request.POST)  # defining the form
+        if form.is_valid():  # checking if form field are filled out as required
+            # so form is not yet saved to the database without the required author, which is set as the user
             snippet = form.save(commit=False)
             # author of new snippet is the user that made the request
             snippet.author = request.user
             snippet.save()
-            # @property
-            # def get_language(self):
-            #     if self.language == "add language":
-            #         return language_form
-            #     else:
-            #         return self.language
-
             return redirect('snippets_list')
 
-    form = SnippetForm()
+    form = SnippetForm()  # this is the form to fill out
     context = {'form': form}
     return render(request, 'snippets/new_snippet.html', context)
 

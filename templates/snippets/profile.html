@@ -8,17 +8,21 @@
     <div class="snippet-row">
       <div class="card">
         <div class="card-title">{{snippet.title}}</div>
-        <div class="card-code">{{snippet.code}}</div>
+        <div class="card-code"><pre><code class="language-css">{{snippet.code}}</code></pre></div>
         <div class="code-copy"><button class="btn" data-clipboard-text={{snippet.code}}>
-            Copy code
-        </button></div>
+          <i class="fa-regular fa-copy"></i>
+      </button></div>
+      <div class="card-description">{{snippet.description}}</div>
+    <div class="card-details">
         <div class="card-language">{{snippet.language}}</div>
         <div class="card-project">Used in (project): {{ snippet.get_project }}</div>
         <div class="card-user">by {{snippet.author}}</div>
+    </div>
         <div class="card-actions">
-          <div class="card-edit"><a href="{% url 'edit_snippet' snippet.pk %}">edit</a></div>
-          <div class="card-fork"><a href="{% url 'fork_snippet' snippet.pk %}">fork</a></div>
-          <div class="card-delete"><a href="{% url 'delete_snippet' snippet.pk %}">delete</a></div>
+          <div class="card-edit"><a href="{% url 'edit_snippet' snippet.pk %}"><i class="fa-regular fa-pen-to-square"></i></a></div>
+          <div class="card-fork"><a href="{% url 'fork_snippet' snippet.pk %}"><i class="fa-solid fa-code-fork"></i></a></div>
+          <div class="card-delete"><a href="{% url 'delete_snippet' snippet.pk %}"><i class="fa-solid fa-trash"></i></a>
+          </div>
         </div>
       </div>
     </div>

@@ -8,5 +8,7 @@ urlpatterns = [
     path('edit_snippet/<int:pk>', views.editSnippet, name="edit_snippet"),
     path('fork_snippet/<int:pk>', views.forkSnippet, name="fork_snippet"),
     path('delete_snippet/<int:pk>', views.deleteSnippet, name="delete_snippet"),
-    path('user_profile', views.user_profile, name='user_profile')
+    path('user_profile', views.user_profile, name='user_profile'),
+    path('search_snippets', views.search_snippets, name='search_snippets'),
+
 ]

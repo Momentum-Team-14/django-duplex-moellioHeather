@@ -13,23 +13,33 @@
 </head>
 <body>
 <div class="header">
-    <header><a href=""></a>Code Snippets</header>
+    <header>Code Snippets</header>
 </div>
-<div class="sidebar">
-    <div><a href="/">All Snippets</a></div>
+<div class="topnav">
+
+    <a class="active" href="/">All Snippets</a>
     {% if user.is_authenticated %} 
-    <div><a href="{% url 'user_profile' %}">My Snippets</a></div>
-    <div class="user">Logged in as: {{ user }}</a></div>
+    <a href="{% url 'user_profile' %}">My Snippets</a>
+    <a href="{% url 'new_snippet' %}">Add a Snippet</a>
+    
+    <div class="input">
+    <form class="d-flexaction" method="POST" action="{% url 'search_snippets' %}">
+        {% csrf_token %}
+            <input type="text" placeholder="Search..." aria-lable="Search" name="searched">
+            <button class="btn btn-outline-secondary" type="supmit">Search</button>
+        </form>
+    </div>
+    </div>
+
+    <div class="user">
+    <div>Logged in as: {{ user }}</a></div>
     <div><a href='/accounts/logout'>Log Out</a></div>
     {% else %}
     <div><a href="{% url 'auth_login' %}">Login</a></div>
     <div><a href="{% url 'registration_register' %}">Create Account</a></div>
     {% endif %}
-    <div class="add-snippet"><a href="{% url 'new_snippet' %}">Add a Snippet</a></div>
-    <div><a href="">Languages</a></div>
-    <div><a href="{% url 'admin:index' %}">Admin</a></div>
+    <div class="admin"><a href="{% url 'admin:index' %}">Admin</a></div>
 </div>
-
 <div class="body-content">
     {% block content %}
     {% endblock %}
